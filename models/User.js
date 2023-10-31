@@ -27,6 +27,7 @@ User.init({
         validate: {
           isEmail: true,
         },
+    },
     password: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -35,7 +36,6 @@ User.init({
         }
     }
 },
-}, 
 {
     hooks: {
         async beforeCreate(newUserData) {
