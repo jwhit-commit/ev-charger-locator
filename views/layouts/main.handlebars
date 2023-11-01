@@ -18,13 +18,15 @@
     {{#if loggedIn}}
     <a id="logout" class="btn-no-style">Logout</a>
     {{else}}
-    <a href="/views/partials/login.handlebars">Login</a>
+    <a href=  "/login">Login</a>
     {{/if}}
   </nav>
   <main class="flex-row mb-3  text-center b-g">
     <aside class="p-2">
-        <h2>Find the location you like!</h2>
+        <h2>Enter your Location here!</h2>
     </aside>
+    
+    {{!-- NAVBAR --}}
     <div class="p-2 location">
         <a href="/login">
             <img src="/public/css/c3controls-Electric-car-public-charger-stations-4.gif" class="img-fluid" alt="ev charge">
