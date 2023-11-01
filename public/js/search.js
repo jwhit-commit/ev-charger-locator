@@ -27,6 +27,23 @@ const evLocations = (search) => {
         console.log(res)
     )
 };
+const searchTerm = document.querySelector("#search-city").value;
+const searchFormHandler = async (city) => {
+    //fetch api
+    const response = await fetch('/api/search', {
+        method: 'POST',
+        body: JSON.stringify({
+            searchTerm
+        })
+    })
+    if(response.ok){
+        document.location("/search");
+    } else {
+        alert("Failed to search")
+    }
+}
+
+document.querySelector("#search-by-city").addEventListener("submit", searchFormHandler)
 
 var search1 = '100 1st st NE, wessington springs, south dakota';
 var rad0 = 100000;
