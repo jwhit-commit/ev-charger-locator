@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVChargerFinder!</title>
-</head>
 <body>
     <h1>Welcome!</h1>
-    <h2>Austin waz here</h2>
-    {{!-- <a href="/partials/login"></a> --}}
-    
-    
-    
+    <image src="/public/css/c3controls-Electric-car-public-charger-stations-4.gif"></image>
+    {{!-- display the user search location history --}}
+    {{#each UserLocations as |Userlocation| }}
+    <div class="row mb-4 location">
+        <div class="col-md-5">
+            <h2>{{{get_emoji}}}
+                <a href="//{{UserLocation.address}}">{{UserLocation.address}}</a>
+            </h2>
+        <p>Searched on {{format_date project.date_created}}</p>
+    </div>
+    <div class="col-md-7">
+    <p>
+      {{!-- top 3 station lists--}}
+    </p>
+    </div>
+    </div>
+    {{/each}}
 </body>
-</html>
