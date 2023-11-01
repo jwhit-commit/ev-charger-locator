@@ -81,4 +81,8 @@ router.get('/', async (req, res) => {
   })}
 catch{}});
 
+router.get('/search', (req, res) => {
+    res.render("search")
+})
+
 module.exports = router;
