@@ -26,8 +26,8 @@ Station. init(
         location_id:{
             type: DataTypes.INTEGER,
             references: {
-                model: 'Location',
-                key: 'id',
+                model: 'UserLocation',
+                key: 'location_id',
             },
         },
         user_id: {
@@ -37,11 +37,13 @@ Station. init(
               key: 'id',
             },
         },
+    }, {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
         modelName: 'Station'
-});
+    }    
+);
 
 module.exports = Station;
