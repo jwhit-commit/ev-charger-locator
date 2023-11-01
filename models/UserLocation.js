@@ -1,32 +1,28 @@
-const { Sequelize, Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class UserLocation extends Model { }
 
 UserLocation.init(
     {
-        location_id: {
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
-        address: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
         user_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'User',
+                model: 'user',
                 key: 'id',
-            },
+              }
         },
-        station_id: {
+        location_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Station',
+                model: 'location',
                 key: 'id',
-            },
+              }
         },
     },
     {
@@ -34,7 +30,7 @@ UserLocation.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'UserLocation'
+        modelName: 'userLocation'
     }
 
 )
