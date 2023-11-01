@@ -79,4 +79,8 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }});
 
+router.get('/search', (req, res) => {
+    res.render("search")
+})
+
 module.exports = router;
