@@ -3,10 +3,10 @@ const UserLocation = require('./Locations');
 const Station = require('./Stations');
 
 
-User.hasMany(UserLocation, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-});
+// User.hasMany(Project, {
+//   foreignKey: 'user_id',
+//   onDelete: 'CASCADE'
+// });
 
 UserLocation.belongsTo(User, {
   foreignKey: 'user_id',
