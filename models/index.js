@@ -1,26 +1,23 @@
 const User = require('./User');
-const UserLocation = require('./Locations');
-const Station = require('./Stations');
+const Location = require('./Location');
+const UserLocation = require('./UserLocation');
 
-
-// User.hasMany(Project, {
-//   foreignKey: 'user_id',
-//   onDelete: 'CASCADE'
-// });
-
-UserLocation.belongsTo(User, {
-  foreignKey: 'user_id',
+User.belongsToMany(Location,{
+    through: {
+      model: UserLocation,
+      unique: false
+  },
+  as: "user_by_location"
 });
 
-UserLocation.hasMany(Station,{
-  foreignKey: 'location_id',
-  onDelete: 'CASCADE'
+Location.belongsToMany(User,{
+    through: {
+      model: UserLocation,
+      unique: false
+  },
+  as: "location_by_user"
 });
 
-Station.belongsTo(UserLocation,{
-  foreignKey:'location_id',
-})
 
-
-module.exports = { User, UserLocation, Station};
+module.exports = { User, Location, UserLocation };
 
