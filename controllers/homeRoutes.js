@@ -23,9 +23,9 @@ router.get('/login', (req, res) => {
 }});
 
 router.get('/search', async (req, res) => {
-    // if(!req.session.logged_in) {
-    //   res.redirect('/login');
-    // } else {
+    if(!req.session.logged_in) {
+      res.redirect('/login');
+    } else {
       try {
       const userData = await User.findByPk(req.session.user_id, {
         include: [
@@ -49,7 +49,7 @@ router.get('/search', async (req, res) => {
       console.log(err);
       res.status(500).json(err);
     }
-  // }
+  }
 });
 
 module.exports = router;
