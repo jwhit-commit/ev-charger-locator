@@ -74,6 +74,41 @@ const renderStations = async () => {
         return; // Exit the function in case of an error.
     }
 
+
+    if (!stations == []) {
+        var stationCard = document.createElement("div");
+        var stationAddress = document.createElement("h1");
+        var stationCurrent = document.createElement("p");
+        var stationVoltage = document.createElement("p");
+        var stationConnector = document.createElement("p");
+        var stationDist = document.createElement("p");
+        var stationName = document.createElement("p");
+        var stationURL = document.createElement("p");
+        var stationPhone = document.createElement("p");
+
+        stationAddress = stations[0].address.freeformAddress;
+        stationCurrent = stations[0].chargingPark.connectors[0].currentType;
+        stationVoltage = stations[0].chargingPark.connectors[0].voltageV;
+        stationConnector = stations[0].chargingPark.connectors[0].connectorType;
+        stationDist = stations[0].dist;
+        stationName = stations[0].poi.classification.name;
+        stationURL = stations[0].poi.classification.url;
+        stationPhone = stations[0].poi.classification.phone;
+        
+
+        stationContainer.append(stationCard);
+        stationCard.append(stationAddress);
+        stationCard.append(stationCurrent);
+        stationCard.append(stationVoltage);
+        stationCard.append(stationConnector);
+        stationCard.append(stationDist);
+        stationCard.append(stationName);
+        stationCard.append(stationURL);
+        stationCard.append(stationPhone);
+
+    };
+}
+
     // Check if there are stations and limit to the first 5 stations.
     const numStationsToDisplay = Math.min(5, stations.length);
 
@@ -119,6 +154,7 @@ const renderStations = async () => {
     // Append the card container to your document
     stationContainer.appendChild(cardContainer);
 };
+
 
 
 
