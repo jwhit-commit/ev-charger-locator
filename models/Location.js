@@ -16,11 +16,11 @@ Location.init(
             allowNull: false,
         },
         lat: {
-            type: DataTypes.FLOAT(4,10),
+            type: DataTypes.FLOAT(10,4),
             allowNull: false,
         },
         lon: {
-            type: DataTypes.FLOAT(4,10),
+            type: DataTypes.FLOAT(10,4),
             allowNull: false,
         }
     },
