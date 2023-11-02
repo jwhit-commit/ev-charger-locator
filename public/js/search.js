@@ -92,7 +92,6 @@ const renderStations = async () => {
         stationURL = stations[0].poi.classification.url;
         stationPhone = stations[0].poi.classification.phone;
         
-
         stationContainer.append(stationCard);
         stationCard.append(stationAddress);
         stationCard.append(stationCurrent);
