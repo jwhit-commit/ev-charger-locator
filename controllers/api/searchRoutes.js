@@ -47,10 +47,10 @@ router.post("/", async (req, res) => {
 
 //Search TomTom for nearby charging stations
 const stationSearch = (lat1,lon1) => {
-    return tt.services.poiSearch({
+    return tt.services.nearbySearch({
         key: 'uP52BPEpr8DQqzKvuzzBj9sRnRK8jtiT',
-        lat: lat1,
-        lon: lon1,
+        center: [lon1,lat1],
+        radius: '50000',
         categorySet: '7309'
     })}
 
@@ -64,7 +64,7 @@ router.get("/results", async (req, res) => {
         let lon1 = locationData.lon
 
         const results = await stationSearch(lat1,lon1);
-        // console.log(results)
+        console.log(results)
         res.status(200).json(results);
 
       } catch (err) {
@@ -72,5 +72,16 @@ router.get("/results", async (req, res) => {
         res.status(500).json(err);
       }
 });
+
+
+//Search TomTom for search route data
+const routeSearch = (lat1,lon1,lat2,lon2) => {
+    tt.services.calculateRoute({
+        key: 'uP52BPEpr8DQqzKvuzzBj9sRnRK8jtiT',
+        locations: lat1.toString().concat(",",lon1.toString()).concat(":",lat2.toString()).concat(",",lon2.toString())
+      }).then(function(routeData) {
+          console.log(routeData.toGeoJson());
+        });
+}
 
 module.exports = router;
