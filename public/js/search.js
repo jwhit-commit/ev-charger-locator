@@ -8,33 +8,18 @@ const stationLookup = async () => {
         });
         var jsonResults = await results.json()
         stations = jsonResults.results;
-        console.log(stations)
         return stations;
     }
     catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
-    console.log(stations);
 };
-
-// const fetchData = async () => {
-//     try {
-//         const stations = await stationLookup();
-//         console.log(stations);
-//     } catch (error) {
-//         console.error(error);
-//     }
-// };
-// fetchData();
-
-// console.log(stations);
 
 const searchLocation = async (event) => {
     event.preventDefault();
 
     const search = document.querySelector('#search').value.trim();
-    console.log(search);
 
     if (search) {
         const response = await fetch('/api/search', {
@@ -44,12 +29,15 @@ const searchLocation = async (event) => {
         });
         const data = await response.json();
         if (response.ok) {
-            console.log(data)
+            
+            try {
+                const stations = await stationLookup();
+            } catch (error) {
+                console.error(error);
+            }
+            renderStations();
+            document.location.replace('/search');
 
-            // stationsJSON = stationLookup()
-            // stations = stationsJSON.results;
-
-            document.location.reload();
         } else {
             alert('Search failed');
         }
@@ -109,6 +97,28 @@ const renderStations = async () => {
     };
 }
 
+
+renderStations();
+
+const stationFav = async () => {
+    try {
+        var newStation = await fetch('/api/save', {
+            method: 'POST',
+            body: JSON.stringify({ id:'xLXDUiug9NIoEAbbp9BSEA' }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        var jsonStation = await newStation.json()
+        console.log(jsonStation)
+    }
+    catch (err) {
+        console.log(err);
+        // res.status(500).json(err);
+    }
+};
+
+// stationFav(); 
+
+
     // Check if there are stations and limit to the first 5 stations.
     const numStationsToDisplay = Math.min(5, stations.length);
 
@@ -157,5 +167,5 @@ const renderStations = async () => {
 
 
 
-
 renderStations();
+
