@@ -13,20 +13,16 @@
   <header class="text-bg-primary p-3 text-center">
     <h1>Welcome to the EV Charger Locator</h1>
   </header>
-  <nav class="navbar-expand-lg bg-body-tertiary text-center fs-2">
-    <a href="/">Home</a>
+  <nav class="navbar-expand-lg bg-body-tertiary text-center fs-2 d-flex justify-content-around m-3">
+    <a href="/" class="btn btn-success btn-lg">Home</a>
     {{#if loggedIn}}
-    <a id="logout" class="btn-no-style">Logout</a>
+    <a id="logout" class="btn btn-success btn-lg"">Logout</a>
     {{else}}
-    <a href=  "/login">Login</a>
+    <a href="/login" class="btn btn-success btn-lg">Login</a>
     {{/if}}
-    <a href="/search">Search</a>
+    <a href="/search" class="btn btn-success btn-lg">Search</a>
   </nav>
   <main class="flex-row mb-3  text-center">
-    <aside class="p-2">
-        <h2>Enter your Location here!</h2>
-    </aside>
-    
     {{!-- NAVBAR --}}
     <div class="p-2 location">
       {{{body}}}
