@@ -14,7 +14,7 @@ const loginFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        // document.location.replace('/search');
+         document.location.replace('/search');
         console.log('working')
       } else {
         alert('Failed to log in.');
@@ -36,7 +36,7 @@ const loginFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        // document.location.replace('/search');
+         document.location.replace('/search');
         console.log('working')
 
       } else {
