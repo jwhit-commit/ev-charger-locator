@@ -22,6 +22,7 @@ const newLocation = (req,userID) => {
             const dbUserData = await User.findOne({ where: { id: userID } });
             dbUserData.location_id = dbLocationData.id;
             await dbUserData.save();
+            return 'done'
         });
 }
 
@@ -34,21 +35,37 @@ router.post("/", async (req, res) => {
         const userID = req.session.user_id
         console.log(req.body);
 
-        if (locationData) {
-            // locationData = await Location.destroy({
-            //     where: {
-            //       id: locationData.id
-            //     },
-            //   });;
-            newLocation(req.body.search, userID);
-            res.status(200).json(userData.location_id);
-            // res.redirect('/search')
-        } 
-        else {
-            newLocation(req.body.search, userID);
-            res.status(200).json(userData.location_id);
-            // res.redirect('/search')
-        }
+        newLocation(req.body.search, userID);
+        res.status(200).json(userData.location_id);
+
+      } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+      }
+});
+
+
+//Search TomTom for nearby charging stations
+const stationSearch = (lat1,lon1) => {
+    return tt.services.poiSearch({
+        key: 'uP52BPEpr8DQqzKvuzzBj9sRnRK8jtiT',
+        lat: lat1,
+        lon: lon1,
+        categorySet: '7309'
+    })}
+
+//Format TT search into GET request
+router.get("/results", async (req, res) => {
+    try {
+        const userData = await User.findByPk(req.session.user_id);
+        let locationData = await Location.findByPk(userData.location_id); 
+
+        let lat1 = locationData.lat
+        let lon1 = locationData.lon
+
+        const results = await stationSearch(lat1,lon1);
+        // console.log(results)
+        res.status(200).json(results);
 
       } catch (err) {
         console.log(err);

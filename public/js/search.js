@@ -15,6 +15,14 @@ const searchLocation = async (event) => {
         const data = await response.json()
     if (response.ok) {
         console.log(data)
+
+        // const results = await fetch('/api/search/results', {
+        //     method: 'GET',
+        //     body: "",
+        //     headers: { 'Content-Type': 'application/json' }
+        // });
+        // console.log(results)
+
         document.location.reload();
       } else {
         alert('Search failed');
@@ -25,3 +33,20 @@ const searchLocation = async (event) => {
 
 
 document.querySelector("#search-form").addEventListener("submit", searchLocation)
+
+const stationLookup = async () => {
+    try {
+    const results = await fetch('/api/search/results', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    });
+    return results.json();
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+      }
+};
+
+let x = stationLookup();
+console.log(x.res)
