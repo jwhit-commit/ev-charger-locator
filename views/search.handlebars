@@ -8,13 +8,12 @@
 <body>
     <h1>Search for nearby EV charging stations</h1>
     <form id="search-form">
-        <label for="search">Enter a location (address, place or city)</label>
+        <label for="search">Enter a location (address, place, or city)</label>
         <input type="text" id="search">
         <button type="submit" id="search-btn">Search</button>
     </form>
     {{!-- <a href="/partials/login"></a> --}}
-    
-    
+    <p>{{user.email}}{{user.location.freeformAddress}}</p>
     
     <script src="/js/search.js"></script>
 </body>
