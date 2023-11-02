@@ -77,10 +77,6 @@ const renderStations = async () => {
     // Check if there are stations and limit to the first 5 stations.
     const numStationsToDisplay = Math.min(5, stations.length);
 
-    // Create a container for the cards
-    const cardContainer = document.createElement("div");
-    cardContainer.classList.add("card-container"); // Add a custom class for the container
-
     for (let i = 0; i < numStationsToDisplay; i++) {
         const stationCard = document.createElement("div");
         stationCard.classList.add("card"); // Add Bootstrap card class
@@ -90,15 +86,11 @@ const renderStations = async () => {
         cardBody.classList.add("card-body");
 
         const stationAddress = document.createElement("h5");
-        stationAddress.classList.add("card-title", "custom-title-class"); // Add a custom class
+        stationAddress.classList.add("card-title");
         const stationCurrent = document.createElement("p");
-        stationCurrent.classList.add("custom-p-class"); // Add a custom class
         const stationVoltage = document.createElement("p");
-        stationVoltage.classList.add("custom-p-class"); // Add a custom class
         const stationConnector = document.createElement("p");
-        stationConnector.classList.add("custom-p-class"); // Add a custom class
         const stationDist = document.createElement("p");
-        stationDist.classList.add("custom-p-class"); // Add a custom class
 
         stationAddress.textContent = stations[i].address.freeformAddress;
         stationCurrent.textContent = `Current: ${stations[i].chargingPark.connectors[0].currentType}`;
@@ -113,11 +105,8 @@ const renderStations = async () => {
         cardBody.appendChild(stationDist);
 
         stationCard.appendChild(cardBody);
-        cardContainer.appendChild(stationCard);
+        stationContainer.appendChild(stationCard);
     }
-
-    // Append the card container to your document
-    stationContainer.appendChild(cardContainer);
 };
 
 
