@@ -94,7 +94,7 @@ const renderStations = async () => {
         stationName = stations[0].poi.classification.name;
         stationURL = stations[0].poi.classification.url;
         stationPhone = stations[0].poi.classification.phone;
-        
+
         stationContainer.append(stationCard);
         stationCard.append(stationAddress);
         stationCard.append(stationCurrent);
@@ -108,51 +108,63 @@ const renderStations = async () => {
     };
 }
 
-    // Check if there are stations and limit to the first 5 stations.
-    const numStationsToDisplay = Math.min(5, stations.length);
+// Check if there are stations and limit to the first 5 stations.
+const numStationsToDisplay = Math.min(5, stations.length);
 
-    // Create a container for the cards
-    const cardContainer = document.createElement("div");
-    cardContainer.classList.add("card-container"); // Add a custom class for the container
+// Create a container for the cards
+const cardContainer = document.createElement("div");
+cardContainer.classList.add("card-container"); // Add a custom class for the container
 
-    for (let i = 0; i < numStationsToDisplay; i++) {
-        const stationCard = document.createElement("div");
-        stationCard.classList.add("card"); // Add Bootstrap card class
-        stationCard.style.width = "18rem"; // Set a fixed width for the card
+for (let i = 0; i < numStationsToDisplay; i++) {
+    const stationCard = document.createElement("div");
+    stationCard.classList.add("card"); // Add Bootstrap card class
+    stationCard.style.width = "18rem"; // Set a fixed width for the card
 
-        const cardBody = document.createElement("div");
-        cardBody.classList.add("card-body");
+    const cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
 
-        const stationAddress = document.createElement("h5");
-        stationAddress.classList.add("card-title", "custom-title-class"); // Add a custom class
-        const stationCurrent = document.createElement("p");
-        stationCurrent.classList.add("custom-p-class"); // Add a custom class
-        const stationVoltage = document.createElement("p");
-        stationVoltage.classList.add("custom-p-class"); // Add a custom class
-        const stationConnector = document.createElement("p");
-        stationConnector.classList.add("custom-p-class"); // Add a custom class
-        const stationDist = document.createElement("p");
-        stationDist.classList.add("custom-p-class"); // Add a custom class
+    const stationAddress = document.createElement("h5");
+    stationAddress.classList.add("card-title", "custom-title-class"); // Add a custom class
+    const stationCurrent = document.createElement("p");
+    stationCurrent.classList.add("custom-p-class"); // Add a custom class
+    const stationVoltage = document.createElement("p");
+    stationVoltage.classList.add("custom-p-class"); // Add a custom class
+    const stationConnector = document.createElement("p");
+    stationConnector.classList.add("custom-p-class"); // Add a custom class
+    const stationDist = document.createElement("p");
+    stationDist.classList.add("custom-p-class"); // Add a custom class
+    const stationName = document.createElement("p");
+    stationName.classList.add("custom-p-class");
+    const stationPhone = document.createElement("p");
+    stationPhone.classList.add("custom-p-class");
+    const stationURL = document.createElement("p");
+    stationURL.classList.add("custom-p-class");
 
-        stationAddress.textContent = stations[i].address.freeformAddress;
-        stationCurrent.textContent = `Current: ${stations[i].chargingPark.connectors[0].currentType}`;
-        stationVoltage.textContent = `Voltage: ${stations[i].chargingPark.connectors[0].voltageV}`;
-        stationConnector.textContent = `Connector: ${stations[i].chargingPark.connectors[0].connectorType}`;
-        stationDist.textContent = `Distance: ${stations[i].dist}`;
+    stationAddress.textContent = stations[i].address.freeformAddress;
+    stationCurrent.textContent = `Current: ${stations[i].chargingPark.connectors[0].currentType}`;
+    stationVoltage.textContent = `Voltage: ${stations[i].chargingPark.connectors[0].voltageV}`;
+    stationConnector.textContent = `Connector: ${stations[i].chargingPark.connectors[0].connectorType}`;
+    stationDist.textContent = `Distance: ${stations[i].dist}`;
+    stationName.textContent = `Station Name: ${stations[i].poi.classification[0].name}`
+    stationPhone.textContent = `Station Phone #: ${stations[i].poi.classification[0].url}`
+    stationURL.textContent = `Station Website: ${stations[i].poi.classification[0].phone}`
 
-        cardBody.appendChild(stationAddress);
-        cardBody.appendChild(stationCurrent);
-        cardBody.appendChild(stationVoltage);
-        cardBody.appendChild(stationConnector);
-        cardBody.appendChild(stationDist);
+    cardBody.appendChild(stationAddress);
+    cardBody.appendChild(stationCurrent);
+    cardBody.appendChild(stationVoltage);
+    cardBody.appendChild(stationConnector);
+    cardBody.appendChild(stationDist);
+    cardBody.appendChild(stationName);
+    cardBody.appendChild(stationPhone);
+    cardBody.appendChild(stationURL);
 
-        stationCard.appendChild(cardBody);
-        cardContainer.appendChild(stationCard);
-    }
-
-    // Append the card container to your document
-    stationContainer.appendChild(cardContainer);
+    stationCard.appendChild(cardBody);
+    cardContainer.appendChild(stationCard);
 };
+
+// Append the card container to your document
+stationContainer.appendChild(cardContainer);
+
 
 
 
