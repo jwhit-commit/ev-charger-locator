@@ -30,10 +30,10 @@ UserStation.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'userLocation'
+        modelName: 'userStation'
     }
 
-)
+) 
 
 
 
