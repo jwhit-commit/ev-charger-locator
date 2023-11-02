@@ -29,19 +29,25 @@ const newLocation = (req,userID) => {
 router.post("/", async (req, res) => {
     try {
         const userData = await User.findByPk(req.session.user_id);
-        const locationData = await Location.findByPk(userData.location_id); 
+        let locationData = await Location.findByPk(userData.location_id); 
 
         const userID = req.session.user_id
         console.log(req.body);
 
         if (locationData) {
-            locationData = await Location.destroy(locationData);
+            // locationData = await Location.destroy({
+            //     where: {
+            //       id: locationData.id
+            //     },
+            //   });;
             newLocation(req.body.search, userID);
-            res.status(200).json(req.body.search);
+            res.status(200).json(userData.location_id);
+            // res.redirect('/search')
         } 
         else {
             newLocation(req.body.search, userID);
-            res.status(200).json(req.body.search);
+            res.status(200).json(userData.location_id);
+            // res.redirect('/search')
         }
 
       } catch (err) {
