@@ -32,6 +32,13 @@ User.init(
                 len: [8]
             }
         },
+        location_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'location',
+                key: 'id',
+            }
+        }
     },
     {
         hooks: {

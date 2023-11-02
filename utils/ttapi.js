@@ -1,6 +1,5 @@
 const tt = require("@tomtom-international/web-sdk-services/dist/services-node.min.js");
 
-
 const chargerSearch = (lon,lat,rad0) => {
     return tt.services.poiSearch({
         key: 'uP52BPEpr8DQqzKvuzzBj9sRnRK8jtiT',
@@ -32,4 +31,4 @@ var rad0 = 100000;
 evLocations(search1)
 
 
-module.exports = { addressSearch,chargerSearch,evLocations };
+module.exports = { addressSearch, chargerSearch, evLocations };

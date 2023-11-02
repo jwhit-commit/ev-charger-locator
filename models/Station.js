@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Location extends Model { }
+class Station extends Model { }
 
-Location.init(
+Station.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,28 +11,36 @@ Location.init(
             primaryKey: true,
             autoIncrement: true,
         },
+        ttid: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         freeformAddress: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         lat: {
-            type: DataTypes.FLOAT(4,10),
+            type: DataTypes.DECIMAL,
             allowNull: false,
         },
         lon: {
-            type: DataTypes.FLOAT(4,10),
+            type: DataTypes.DECIMAL,
             allowNull: false,
-        }
+        },
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'location'
+        modelName: 'station'
     }
 );
 
 
 
-module.exports = Location;
+module.exports = Station;

@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVChargerFinder!</title>
-</head>
-<body>
     <h1>Search for nearby EV charging stations</h1>
     <form id="search-form">
-        <label for="search">Enter a location (address, place or city)</label>
+        <label for="search">Enter a location (address, place, or city)</label>
         <input type="text" id="search">
         <button type="submit" id="search-btn">Search</button>
     </form>
     {{!-- <a href="/partials/login"></a> --}}
-    
-    
-    
+    <p>Welcome {{user.email}}</p>
+    <p>Starting location: {{user.location.freeformAddress}}</p>
+    <p></p>
+    {{!-- {{#each }} --}}
     <script src="/js/search.js"></script>
-</body>
-</html>
