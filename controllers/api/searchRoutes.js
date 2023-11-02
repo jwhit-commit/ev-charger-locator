@@ -33,7 +33,6 @@ router.post("/", async (req, res) => {
         let locationData = await Location.findByPk(userData.location_id); 
 
         const userID = req.session.user_id
-        console.log(req.body);
 
         newLocation(req.body.search, userID);
         res.status(200).json(userData.location_id);
@@ -59,12 +58,12 @@ router.get("/results", async (req, res) => {
     try {
         const userData = await User.findByPk(req.session.user_id);
         let locationData = await Location.findByPk(userData.location_id); 
+        // console.log(locationData)
 
         let lat1 = locationData.lat
         let lon1 = locationData.lon
 
         const results = await stationSearch(lat1,lon1);
-        console.log(results)
         res.status(200).json(results);
 
       } catch (err) {
@@ -74,14 +73,5 @@ router.get("/results", async (req, res) => {
 });
 
 
-//Search TomTom for search route data
-const routeSearch = (lat1,lon1,lat2,lon2) => {
-    tt.services.calculateRoute({
-        key: 'uP52BPEpr8DQqzKvuzzBj9sRnRK8jtiT',
-        locations: lat1.toString().concat(",",lon1.toString()).concat(":",lat2.toString()).concat(",",lon2.toString())
-      }).then(function(routeData) {
-          console.log(routeData.toGeoJson());
-        });
-}
-
+ 
 module.exports = router;
