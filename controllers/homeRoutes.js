@@ -16,14 +16,14 @@ router.get('/', async (req, res) => {
 router.get('/login', (req, res) => {
   try {
   res.render('login', {
-    loggedIn: req.session.loggedIn
+    logged_in: req.session.logged_in
   });
   } catch (err) {
     res.status(500).json(err);
 }});
 
 router.get('/search', async (req, res) => {
-    // if(!req.session.loggedIn) {
+    // if(!req.session.logged_in) {
     //   res.redirect('/login');
     // } else {
       try {
@@ -40,9 +40,10 @@ router.get('/search', async (req, res) => {
         ],
       });
       const user = userData.get({ plain: true});
+      console.log(user)
       res.render('search', {
         user,
-        loggedIn: req.session.loggedIn
+        logged_in: req.session.logged_in
       });
     } catch (err) {
       console.log(err);

@@ -12,13 +12,15 @@ const searchLocation = async (event) => {
             body: JSON.stringify({ search }),
             headers: { 'Content-Type': 'application/json' }
         });
-
+        const data = await response.json()
     if (response.ok) {
+        console.log(data)
         document.location.reload();
       } else {
         alert('Search failed');
       }
     }
+    
 };
 
 
