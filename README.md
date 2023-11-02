@@ -28,4 +28,4 @@
   
   ## Questions
   - GitHub: [cpapanicholas, tanfei0704, jwhit-commit, omes773.](https://github.com/cpapanicholas, tanfei0704, jwhit-commit, omes773.)
-  - Email: cpapanicholas@gmail.com, tanfei0704@gmail.com, omes773@gmail.com, 
+  - Email: cpapanicholas@gmail.com, tanfei0704@gmail.com, omes773@gmail.com, jwhit.cmit@gmail.com
