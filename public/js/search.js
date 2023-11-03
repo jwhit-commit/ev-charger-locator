@@ -10,7 +10,6 @@ const stationLookup = async () => {
         });
         var jsonResults = await results.json();
         stations = jsonResults.results;
-        console.log(stations);
         return stations;
     } catch (err) {
         console.error(err);
@@ -24,7 +23,6 @@ const searchLocation = async (event) => {
     event.preventDefault();
 
     const search = document.querySelector('#search').value.trim();
-    console.log(search);
 
     if (search) {
         const response = await fetch('/api/search', {
@@ -34,8 +32,15 @@ const searchLocation = async (event) => {
         });
         const data = await response.json();
         if (response.ok) {
-            console.log(data);
-            document.location.reload();
+            
+            try {
+                const stations = await stationLookup();
+            } catch (error) {
+                console.error(error);
+            }
+            renderStations();
+            document.location.replace('/search');
+
         } else {
             alert('Search failed');
         }
@@ -58,6 +63,44 @@ const renderStations = async () => {
         console.error(error);
         return; // Exit the function in case of an error.
     }
+
+
+    if (!stations == []) {
+        var stationCard = document.createElement("div");
+        var stationAddress = document.createElement("h1");
+        var stationCurrent = document.createElement("p");
+        var stationVoltage = document.createElement("p");
+        var stationConnector = document.createElement("p");
+        var stationDist = document.createElement("p");
+        var stationName = document.createElement("p");
+        var stationURL = document.createElement("p");
+        var stationPhone = document.createElement("p");
+
+        stationAddress = stations[0].address.freeformAddress;
+        stationCurrent = stations[0].chargingPark.connectors[0].currentType;
+        stationVoltage = stations[0].chargingPark.connectors[0].voltageV;
+        stationConnector = stations[0].chargingPark.connectors[0].connectorType;
+        stationDist = stations[0].dist;
+        stationName = stations[0].poi.classification.name;
+        stationURL = stations[0].poi.classification.url;
+        stationPhone = stations[0].poi.classification.phone;
+        
+
+        stationContainer.append(stationCard);
+        stationCard.append(stationAddress);
+        stationCard.append(stationCurrent);
+        stationCard.append(stationVoltage);
+        stationCard.append(stationConnector);
+        stationCard.append(stationDist);
+        stationCard.append(stationName);
+        stationCard.append(stationURL);
+        stationCard.append(stationPhone);
+
+    };
+}
+
+    // Check if there are stations and limit to the first 5 stations.
+    const numStationsToDisplay = Math.min(5, stations.length);
 
     // Create a container for the cards
     const cardParent = document.createElement("div");
@@ -115,5 +158,7 @@ const renderStations = async () => {
 
 };
 
-// Call the function to render stations
+
+
+
 renderStations();
