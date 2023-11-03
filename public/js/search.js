@@ -82,7 +82,7 @@ const renderStations = async () => {
         stationCard.appendChild(cardBody);
         cardContainer.appendChild(stationCard);
 
-        favBtn.addEventListener("click", function() {stationFav(stations[i].id)}) //adds event listener for Fav/Save functionality -- See stationFav() below
+        favBtn.addEventListener("click", function() {stationFav1(stations[i].id)}) //adds event listener for Fav/Save functionality -- See stationFav() below
     }
     
     // Append the card container to your document
@@ -110,7 +110,6 @@ const searchLocation = async (event) => {
                 console.error(error);
             }
             renderStations();
-            document.location.replace('/search');
 
         } else {
             alert('Search failed');
@@ -120,7 +119,9 @@ const searchLocation = async (event) => {
 };
 
 // Add search functionality to search button
-document.querySelector("#search-form").addEventListener("submit", searchLocation)
+const searchLocation1 = (event) => {searchLocation(event).then(document.location.reload())}
+document.querySelector("#search-form").addEventListener("submit", searchLocation1)
+
 
 // Renders nearby stations based on saved user location (if logging back in)
 renderStations();
@@ -139,5 +140,7 @@ const stationFav = async (ttid) => {
         console.log(err);
         // res.status(500).json(err);
     }
-    await document.location.replace('/search');
+    // await document.location.reload();
 };
+
+const stationFav1 = (ttid) => {stationFav(ttid).then(setTimeout(document.location.reload(), 500))}
