@@ -60,6 +60,21 @@ router.post("/", async (req, res) => {
       }
 });
 
+router.delete('/delete', async (req, res) => {
+    // delete station
+    try {
+        const stationData = await Station.destroy({ where: { ttid: req.body.id } })
+
+        const userData = await UserStation.destroy({ where: { user_id: req.session.user_id } });
+
+    } catch (err) {
+      res.status(500).json(err);
+    }
+
+});
+
+
+
 
 
 module.exports = router;
