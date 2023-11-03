@@ -121,9 +121,6 @@ for (let i = 0; i < numStationsToDisplay; i++) {
 // Append the card container to your document
 stationContainer.appendChild(cardContainer);
 
-
-=======
-    
     // Check if there are stations and limit to the first 5 stations.
     const numStationsToDisplay = Math.min(5, stations.length);
     
