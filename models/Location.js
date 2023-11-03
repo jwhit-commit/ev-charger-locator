@@ -22,7 +22,7 @@ Location.init(
         lon: {
             type: DataTypes.FLOAT(10,4),
             allowNull: false,
-        }
+        },
     },
     {
         sequelize,

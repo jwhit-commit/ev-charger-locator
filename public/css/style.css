@@ -1,0 +1,34 @@
+.card-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+}
+
+/* Custom styles for the card container */
+.card-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: flex-start; 
+  }
+  
+  /* Custom styles for individual cards */
+  .card {
+    width: 18rem; /* Set the fixed width for each card */
+    border: 1px solid #ccc; /* Add a border for separation */
+    border-radius: 10px; /* Add rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  }
+  
+  /* Custom styles for the card title */
+  .card-title {
+    font-size: 2rem; /* Adjust the title font size */
+  }
+  
+  /* Custom styles for paragraph elements inside the card */
+  .custom-p-class {
+    font-size: 1.5rem; /* Adjust the font size for paragraphs */
+    color: #666; /* Change the text color for paragraphs */
+    margin: 5px 0; /* Add margin to separate paragraphs */
+  }
