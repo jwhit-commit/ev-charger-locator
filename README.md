@@ -1,7 +1,7 @@
   # EV-CHARGER-FINDER 
   
   ## Description
-  This project is a Electric vehicle charger finder, and it implements the use of the tom tom service api, node js, bcrypt, connection-session-sequelize, dotenv, express(handlebars and session), sequelize, and mysql.  This application allows you to locate charging stations by your desired location and lets you save your favorite stations as well.
+  This project is a Electric vehicle charger finder, and it implements the use of the tom tom service api, node js, bcrypt, connection-session-sequelize, dotenv, express(handlebars and session), sequelize, wirlwind, and mysql.  This application allows you to locate charging stations by your desired location and lets you save your favorite stations as well.
   
   ## Table of Contents
   - [Installation](#installation)
