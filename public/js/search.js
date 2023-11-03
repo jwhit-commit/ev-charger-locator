@@ -134,7 +134,17 @@ const stationFav = async (ttid) => {
             headers: { 'Content-Type': 'application/json' }
         });
         var jsonStation = await newStation.json()
-        console.log(jsonStation)
+        console.log(jsonStation);
+
+        const stationFavCard = document.createElement ("div");
+        stationFavCard.textContent = `${jsonStation}`;
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "X";
+        stationFavCard.appendChild(deleteBtn);
+        //delete function to remove the saved fav station
+        deleteBtn.addEventListener('click',()=>{
+            deleteSaveStation(stationFavCard)
+        })
     }
     catch (err) {
         console.log(err);
