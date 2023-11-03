@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Location } = require('../models');
+const { User, Location, Station } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -35,12 +35,13 @@ router.get('/search', async (req, res) => {
               'freeformAddress',
               'lat',
               'lon',
-            ],
+            ],},
+            {model: Station,
+            as: 'user_by_station'
           },
         ],
       });
       const user = userData.get({ plain: true});
-      console.log(user)
       res.render('search', {
         user,
         logged_in: req.session.logged_in

@@ -8,12 +8,12 @@ router.post('/', async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-
+    let userData = dbUserData.get( {plain:true} )
     req.session.save(() => {
       req.session.logged_in = true;
-      req.session.user_id = dbUserData.id;
+      req.session.user_id = userData.id;
 
-      res.status(200).json(dbUserData); 
+      res.status(200).json(userData); 
     });
   } catch (err) {
     console.log(err);
@@ -24,7 +24,6 @@ router.post('/', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
   try {
-    console.log(req.body.email)
     const userData = await User.findOne({ where: { email: req.body.email } });
 
     if (!userData) {
