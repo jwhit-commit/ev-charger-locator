@@ -40,7 +40,7 @@ const renderStations = async () => {
     for (let i = 0; i < numStationsToDisplay; i++) {
         const stationCard = document.createElement("div");
         stationCard.classList.add("card"); // Add Bootstrap card class
-        stationCard.classList.add("col");
+        stationCard.classList.add("col-2");
         stationCard.style.width = "18rem"; // Set a fixed width for the card
         
         const cardBody = document.createElement("div");
@@ -133,21 +133,11 @@ const stationFav = async (ttid) => {
             body: JSON.stringify({ id: ttid }),
             headers: { 'Content-Type': 'application/json' }
         });
-        var jsonStation = await newStation.json()
-        console.log(jsonStation);
-
-        const stationFavCard = document.createElement ("div");
-        stationFavCard.textContent = `${jsonStation}`;
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "X";
-        stationFavCard.appendChild(deleteBtn);
-        //delete function to remove the saved fav station
-        deleteBtn.addEventListener('click',()=>{
-            deleteSaveStation(stationFavCard)
-        })
+        var jsonStation = await newStation.json();
     }
     catch (err) {
         console.log(err);
         // res.status(500).json(err);
     }
+    await document.location.replace('/search');
 };

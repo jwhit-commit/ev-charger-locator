@@ -14,15 +14,12 @@ const findStation = (id) => {
 const addStation = async (ttid1,userId1) => {
     try {
         const stationData = await Station.findOne({ where: { ttid: ttid1 } })
-        // console.log(stationData)
 
         const userData = await User.findByPk(userId1);
-        // console.log(userData)
 
         if (!stationData) {
             findStation(ttid1)
             .then(async (res) => {
-                console.log(res);
                 const dbStationData = await Station.create({
                     ttid: res.results[0].id,
                     name: res.results[0].poi.name,
@@ -30,7 +27,6 @@ const addStation = async (ttid1,userId1) => {
                     lat: res.results[0].position.lat,
                     lon: res.results[0].position.lng
                 })
-                // console.log(dbStationData)
                 const dbUserStationData = await UserStation.create({
                     user_id: userId1,
                     station_id: dbStationData.id
@@ -54,10 +50,7 @@ const addStation = async (ttid1,userId1) => {
 //Structure above function into API call
 router.post("/", async (req, res) => {
     try {
-        console.log(req.session.user_id);
-
         results = await addStation(req.body.id,req.session.user_id);
-        // console.log(results);
         
         // res.status(200).json(userData.location_id);
 
