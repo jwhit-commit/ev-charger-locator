@@ -42,7 +42,6 @@ router.get('/search', async (req, res) => {
         ],
       });
       const user = userData.get({ plain: true});
-      console.log(user)
       res.render('search', {
         user,
         logged_in: req.session.logged_in
