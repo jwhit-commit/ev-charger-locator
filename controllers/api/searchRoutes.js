@@ -60,13 +60,14 @@ router.get("/results", async (req, res) => {
         let locationData = await Location.findByPk(userData.location_id); 
         // console.log(locationData)
 
+        if (!locationData) {} else {
         let lat1 = locationData.lat
         let lon1 = locationData.lon
 
         const results = await stationSearch(lat1,lon1);
         res.status(200).json(results);
 
-      } catch (err) {
+      }} catch (err) {
         console.log(err);
         res.status(500).json(err);
       }

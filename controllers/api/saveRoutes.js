@@ -11,13 +11,18 @@ const findStation = (id) => {
 };
 
 //Create new db rows with TT data
-const addStation = async (id) => {
+const addStation = async (ttid1,userId1) => {
     try {
-        const stationData = await Station.findOne({ where: { ttid: id } })
+        const stationData = await Station.findOne({ where: { ttid: ttid1 } })
+        // console.log(stationData)
+
+        const userData = await User.findByPk(userId1);
+        // console.log(userData)
 
         if (!stationData) {
-            findStation(id)
+            findStation(ttid1)
             .then(async (res) => {
+                console.log(res);
                 const dbStationData = await Station.create({
                     ttid: res.results[0].id,
                     name: res.results[0].poi.name,
@@ -25,18 +30,18 @@ const addStation = async (id) => {
                     lat: res.results[0].position.lat,
                     lon: res.results[0].position.lng
                 })
-                console.log(dbStationData)
+                // console.log(dbStationData)
                 const dbUserStationData = await UserStation.create({
-                    user_id: res.session.user_id,
+                    user_id: userId1,
                     station_id: dbStationData.id
                 })
             })
         }
         else {
-            findStation(id)
+            findStation(ttid1)
             .then(async (res) => {
             const dbUserStationData = await UserStation.create({
-                user_id: res.session.user_id,
+                user_id: userId1,
                 station_id: stationData.id
             })})
         }
@@ -49,10 +54,10 @@ const addStation = async (id) => {
 //Structure above function into API call
 router.post("/", async (req, res) => {
     try {
-        console.log(req.body);
+        console.log(req.session.user_id);
 
-        results = await addStation(req.body.id);
-        console.log(results);
+        results = await addStation(req.body.id,req.session.user_id);
+        // console.log(results);
         
         // res.status(200).json(userData.location_id);
 
