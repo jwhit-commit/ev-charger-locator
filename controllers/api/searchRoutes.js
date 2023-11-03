@@ -57,8 +57,7 @@ const stationSearch = (lat1,lon1) => {
 router.get("/results", async (req, res) => {
     try {
         const userData = await User.findByPk(req.session.user_id);
-        let locationData = await Location.findByPk(userData.location_id); 
-        // console.log(locationData)
+        let locationData = await Location.findByPk(userData.location_id);
 
         if (!locationData) {} else {
         let lat1 = locationData.lat
