@@ -76,5 +76,20 @@ router.delete('/delete', async (req, res) => {
 
 
 
+router.delete('/delete', async (req, res) => {
+    // delete station
+    console.log('done')
+    try {
+        const stationData = await Station.destroy({ where: { id: req.body.id } })
+
+        const userData = await UserStation.destroy({ where: { 
+            user_id: req.session.user_id,
+            station_id: req.body.id,
+        } });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+
+});
 
 module.exports = router;

@@ -1,4 +1,5 @@
 stationContainer = document.querySelector('#nearby-stations')
+
 // Function to find nearby stations (calls backend API)
 const stationLookup = async () => {
     try {
@@ -59,12 +60,10 @@ const renderStations = async () => {
         const meters = stations[i].dist;
         const miles =  meters/ 1609.34;
         stationDist.textContent = `Distance: ${miles.toFixed(2)} miles`;
-
         const favBtn = document.createElement("button");
         favBtn.classList.add("btn","btn-primary"); // Add a custom class
         favBtn.dataset.ttid = stations[i].id;
         favBtn.textContent = `Save for later`
-
         cardBody.appendChild(stationName);
         cardBody.appendChild(stationAddress);
         cardBody.appendChild(stationCurrent);
@@ -74,7 +73,6 @@ const renderStations = async () => {
         cardBody.appendChild(favBtn);
         stationCard.appendChild(cardBody);
         cardContainer.appendChild(stationCard);
-
         favBtn.addEventListener("click", function() {stationFav(stations[i].id)}) //adds event listener for Fav/Save functionality -- See stationFav() below
     }
     // Append the card container to your document
@@ -105,7 +103,9 @@ const searchLocation = async (event) => {
     }
 };
 // Add search functionality to search button
-document.querySelector("#search-form").addEventListener("submit", searchLocation)
+const searchLocation1 = (event) => {searchLocation(event).then(window.location.reload())};
+document.querySelector("#search-form").addEventListener("submit", searchLocation1)
+
 // Renders nearby stations based on saved user location (if logging back in)
 renderStations();
 // Function to add a saved station to user profile
@@ -118,7 +118,6 @@ const stationFav = async (ttid) => {
         });
         var jsonStation = await newStation.json()
         console.log(jsonStation)
-
     }
     catch (err) {
         console.log(err);
@@ -126,6 +125,28 @@ const stationFav = async (ttid) => {
     }
 };
 
+// Function to delete a saved station from user profile
+const stationDel = async (id) => {
+    console.log('done')
+    try {
+        var newStation = await fetch('/api/save/delete', {
+            method: 'DELETE',
+            body: JSON.stringify({ id: id }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        var jsonStation = await newStation.json()
+        console.log(jsonStation)
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+};
 
+const stationDel1 = (id) => {stationDel(id).then(window.location.reload())};
 
-
+deleteBtns = document.querySelectorAll("#delete-btn");
+console.log(deleteBtns[0].dataset.id)
+for (let i = 0; i < deleteBtns.length; i++) {
+    deleteBtns[i].addEventListener("click", function() {stationDel1(deleteBtns[i].dataset.id)})
+}
